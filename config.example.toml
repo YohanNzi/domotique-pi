@@ -1,0 +1,18 @@
+# Copier en /etc/domotique/config.toml sur le Pi (ou config.toml en local) et adapter.
+
+database = "/var/lib/domotique/domotique.db"
+retention_days = 365   # ~12 mesures/minute → ~6 M lignes/an, quelques centaines de Mo au plus
+
+[sources.system]
+enabled = true         # température SoC, charge, mémoire, disque du Pi
+
+[sources.weather]
+enabled = true         # Open-Meteo, gratuit, sans clé
+latitude = 43.6047     # Toulouse
+longitude = 1.4442
+
+[sources.network]
+enabled = true
+count = 3
+# libellé = hôte. Remplacer l'IP de la box par celle de ton réseau (voir `ip route` sur le Pi).
+targets = { box = "192.168.1.1", internet = "1.1.1.1" }

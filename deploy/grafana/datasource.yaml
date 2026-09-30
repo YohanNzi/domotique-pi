@@ -1,0 +1,10 @@
+# Provisioning Grafana : à copier dans /etc/grafana/provisioning/datasources/
+# Nécessite le plugin SQLite : grafana-cli plugins install frser-sqlite-datasource
+apiVersion: 1
+datasources:
+  - name: Domotique (SQLite)
+    type: frser-sqlite-datasource
+    access: proxy
+    isDefault: true
+    jsonData:
+      path: /var/lib/domotique/domotique.db

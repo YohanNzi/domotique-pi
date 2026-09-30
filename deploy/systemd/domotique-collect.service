@@ -1,0 +1,17 @@
+[Unit]
+Description=Domotique — une passe de collecte des mesures
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=domotique
+Group=domotique
+Environment=PYTHONPATH=/opt/domotique/src
+ExecStart=/usr/bin/python3 -m domotique collect --config /etc/domotique/config.toml
+# /var/lib/domotique créé par systemd. Groupe en écriture : en mode WAL, un LECTEUR SQLite
+# (Grafana, ajouté au groupe domotique) doit pouvoir écrire le fichier -shm.
+StateDirectory=domotique
+StateDirectoryMode=0770
+UMask=0007
+Nice=10
